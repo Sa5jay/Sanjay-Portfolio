@@ -85,7 +85,7 @@ const Portfolio = () => {
         <div className="text-center z-10 max-w-4xl mx-auto px-6">
           <div className="mb-8">
             <div className="w-40 h-40 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-6 flex items-center justify-center text-4xl font-bold">
-              <img src="./src/assets/Profile.png" className='object-cover bg-cover rounded-full'/>
+              <img src="/Profile.png" className='object-cover bg-cover rounded-full'/>
             </div>
           </div>
           <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
