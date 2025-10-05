@@ -32,11 +32,11 @@ const Portfolio = () => {
       live: "https://codejavid-apps-448w.vercel.app"
     },
     {
-      title: "Tic Tac Toe with AI",
-      description: "A web game where players compete against an AI opponent programmed with strategic logic. Demonstrates skills in algorithm design, game logic, and interactive frontend development.",
-      technologies: ["React", "Firebase", "Tailwind CSS","OpenRouter API"],
-      github: "https://github.com/Sa5jay/codejavid-apps/tree/main/Tic-Tac-Tai",
-      live: "https://codejavid-apps.vercel.app/"
+      title: "Task Manager App",
+      description: "A full-stack Task Manager web app that lets users register, log in, and manage tasks securely.Built with React, Node.js, Express, and MongoDB for efficient CRUD operations.Implements JWT authentication and responsive UI for smooth user experience.",
+      technologies: ["React", "Node js", "Express js","MongoDB","JWT Authentication"],
+      github: "https://github.com/Sa5jay/task-manager-app",
+      live: "https://task-manager-app-zeta-nine.vercel.app/"
     }
 
   ];
@@ -92,7 +92,7 @@ const Portfolio = () => {
             Sanjay Neelakandan
           </h1>
           <p className="text-xl md:text-2xl text-purple-200 mb-8 leading-relaxed">
-            Web Developer & UI & UX Designer
+            Frontend & MERN Stack Developer
           </p>
           <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
             Creating beautiful, functional, and user-centered digital experiences with modern web technologies.
