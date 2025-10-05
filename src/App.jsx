@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code,Phone, Palette, Database, Globe } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -190,20 +190,25 @@ const Portfolio = () => {
             I'm always interested in new opportunities and exciting projects. Let's create something amazing together!
           </p>
           <div className="flex justify-center space-x-8 mb-12">
-            <a href="mailto:john@example.com" className="flex flex-col items-center space-y-2 p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105">
+            <a href="mail.to.sanjayn05@gmail.com" className="flex flex-col items-center space-y-2 ">
               <Mail className="w-8 h-8 text-purple-400" />
               <span className="text-white/80">Email</span>
-              <span className="text-sm text-white/60">john@example.com</span>
+              
             </a>
-            <a href="https://www.linkedin.com/in/sanjayneelakandan/" className="flex flex-col items-center space-y-2 p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105">
+            <a href="https://www.linkedin.com/in/sanjayneelakandan/" className="flex flex-col items-center space-y-2  ">
               <Linkedin className="w-8 h-8 text-purple-400" />
               <span className="text-white/80">LinkedIn</span>
-              <span className="text-sm text-white/60">Connect with me</span>
+              
             </a>
-            <a href="https://github.com/Sa5jay" className="flex flex-col items-center space-y-2 p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105">
+            <a href="https://github.com/Sa5jay" className="flex flex-col items-center space-y-2    ">
               <Github className="w-8 h-8 text-purple-400" />
               <span className="text-white/80">GitHub</span>
-              <span className="text-sm text-white/60">View my code</span>
+              
+            </a>
+            <a href="https://wa.me/918248830924" className="flex flex-col items-center space-y-2    ">
+              <Phone className="w-8 h-8 text-purple-400" />
+              <span className="text-white/80">Contact</span>
+              
             </a>
           </div>
         </div>
