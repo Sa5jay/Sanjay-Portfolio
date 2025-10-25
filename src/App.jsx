@@ -137,14 +137,6 @@ const Navbar = ({ onScrollTo }) => {
                 {link.title}
               </a>
             ))}
-            <a
-              href="/Sanjay.Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-4 px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition-all duration-200 hover:bg-blue-700"
-            >
-              View Resume
-            </a>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -174,14 +166,6 @@ const Navbar = ({ onScrollTo }) => {
                 {link.title}
               </a>
             ))}
-            <a
-              href="/My.Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded font-medium text-center"
-            >
-              View Resume
-            </a>
           </nav>
         </div>
       )}
@@ -262,7 +246,7 @@ const App = () => {
                   View My Work
                 </a>
                 <a
-                  href="/My.Resume.pdf"
+                  href="/Sanjay.Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gray-100 text-gray-800 rounded font-semibold border border-gray-300 transition-all duration-300 hover:bg-gray-200"
