@@ -64,6 +64,17 @@ const App = () => {
               <div className="text-2xl font-bold text-white">Sanjay</div>
             </a>
 
+            {/* Mobile resume button (visible only on small screens) */}
+            <a
+              href="/My.Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Resume"
+              className="md:hidden ml-4 px-3 py-2 bg-white text-slate-950 rounded text-sm font-medium"
+            >
+              Resume
+            </a>
+
             <nav className="hidden items-center md:flex space-x-6" aria-label="Primary">
               {['home', 'about', 'projects', 'contact'].map((section) => (
                 <a
