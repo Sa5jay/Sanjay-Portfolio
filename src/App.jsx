@@ -138,7 +138,7 @@ const Navbar = ({ onScrollTo }) => {
               </a>
             ))}
             <a
-              href="/My.Resume.pdf"
+              href="/Sanjay.Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-4 px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition-all duration-200 hover:bg-blue-700"
