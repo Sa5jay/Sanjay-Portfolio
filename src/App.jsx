@@ -246,7 +246,7 @@ const App = () => {
                   View My Work
                 </a>
                 <a
-                  href="/Sanjay.Resume.pdf"
+                  href="/MyResume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gray-100 text-gray-800 rounded font-semibold border border-gray-300 transition-all duration-300 hover:bg-gray-200"
