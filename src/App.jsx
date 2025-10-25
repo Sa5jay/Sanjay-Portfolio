@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Phone, Palette, Database, Globe, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Phone, Palette, Database, Globe } from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -78,24 +78,14 @@ const App = () => {
                   {section}
                 </a>
               ))}
-              <div className="flex items-center space-x-2">
-                <a
-                  href="/My.Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-white text-slate-950 rounded-l font-medium text-sm transition-all duration-200 hover:bg-slate-100 flex items-center"
-                >
-                  <span>View Resume</span>
-                </a>
-                <a
-                  href="/resume.pdf"
-                  download="Sanjay_Neelakandan_Resume.pdf"
-                  className="px-3 py-2 bg-white text-slate-950 rounded-r border-l border-slate-200 font-medium transition-all duration-200 hover:bg-slate-100 flex items-center"
-                  title="Download Resume"
-                >
-                  <Download size={16} />
-                </a>
-              </div>
+              <a
+                href="/My.Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-4 px-4 py-2 bg-white text-slate-950 rounded font-medium text-sm transition-all duration-200 hover:bg-slate-100"
+              >
+                View Resume
+              </a>
             </nav>
           </div>
         </div>
