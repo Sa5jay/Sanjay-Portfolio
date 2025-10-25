@@ -1,21 +1,197 @@
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Code, Phone, Palette, Database, Globe } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  Github, 
+  Linkedin, 
+  Mail, 
+  ExternalLink, 
+  Code, 
+  Database, 
+  Globe, 
+  Menu, 
+  X,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Briefcase,
+  User,
+  MessageSquare
+} from 'lucide-react';
+import { useForm } from '@formspree/react';
 
-const App = () => {
-  const [activeSection, setActiveSection] = useState('home');
-  const [scrollY, setScrollY] = useState(0);
+// --- Contact Form Component ---
+const ContactForm = () => {
+  // ---
+  // --- 1. REMINDER: Replace "YOUR_ID_HERE" with your Formspree ID
+  // ---
+  const [state, handleSubmit] = useForm("manlwzjq");
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  if (state.succeeded) {
+    return (
+      <div className="text-center p-4 bg-green-50 border border-green-300 rounded-md">
+        <CheckCircle className="w-12 h-12 mx-auto mb-4 text-green-600" />
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
+        <p className="text-gray-700">Thanks for reaching out. I'll get back to you soon.</p>
+      </div>
+    );
+  }
 
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    setActiveSection(sectionId);
+  if (state.errors) {
+    return (
+      <div className="text-center p-4 bg-red-50 border border-red-300 rounded-md">
+        <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-600" />
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">Error!</h3>
+        <p className="text-gray-700">Something went wrong. Please try again later.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          Your Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          required
+          className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          Your Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={state.submitting}
+        className="w-full flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg transition-all duration-300
+                   hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                   disabled:bg-gray-400"
+      >
+        <Send className="w-5 h-5 mr-2" />
+        {state.submitting ? 'Sending...' : 'Send Message'}
+      </button>
+    </form>
+  );
+};
+
+
+// --- Navigation Component ---
+const Navbar = ({ onScrollTo }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { id: 'about', title: 'About', icon: User },
+    { id: 'projects', title: 'Projects', icon: Briefcase },
+    { id: 'contact', title: 'Contact', icon: MessageSquare },
+  ];
+
+  const handleLinkClick = (id) => {
+    onScrollTo(id);
+    setMobileMenuOpen(false);
   };
 
+  return (
+    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="flex justify-between items-center">
+          <a
+            href="#home"
+            onClick={(e) => { e.preventDefault(); handleLinkClick('home'); }}
+            className="text-2xl font-bold text-gray-900"
+          >
+            Sanjay
+          </a>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => { e.preventDefault(); handleLinkClick(link.id); }}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                {link.title}
+              </a>
+            ))}
+            <a
+              href="/My.Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition-all duration-200 hover:bg-blue-700"
+            >
+              View Resume
+            </a>
+          </nav>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded text-gray-600 hover:text-blue-600 hover:bg-gray-100"
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white border-b border-gray-200 md:hidden">
+          <nav className="flex flex-col p-6 space-y-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => { e.preventDefault(); handleLinkClick(link.id); }}
+                className="block text-lg text-gray-700 hover:text-blue-600"
+              >
+                <link.icon className="inline-block w-5 h-5 mr-3" />
+                {link.title}
+              </a>
+            ))}
+            <a
+              href="/My.Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded font-medium text-center"
+            >
+              View Resume
+            </a>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+
+// --- Main App Component ---
+const App = () => {
   const projects = [
     {
       title: "GameAtlas",
@@ -26,228 +202,205 @@ const App = () => {
     },
     {
       title: "AI Tattoo Generator Web App",
-      description: "A web app that generates custom tattoo designs from user prompts using AI. Showcases seamless integration of AI APIs with modern frontend development.",
+      description: "A web app that generates custom tattoo designs from user prompts using AI. Showcases seamless integration of AI APIs.",
       technologies: ["React", "Firebase", "Tailwind CSS","OpenRouter API"],
       github: "https://github.com/Sa5jay/codejavid-apps/tree/main/tatoogenerator",
       live: "https://codejavid-apps-448w.vercel.app"
     },
     {
       title: "Task Manager App",
-      description: "A full-stack Task Manager web app that lets users register, log in, and manage tasks securely.Built with React, Node.js, Express, and MongoDB for efficient CRUD operations.Implements JWT authentication and responsive UI for smooth user experience.",
-      technologies: ["React","TypeScript", "Node js", "Express js","MongoDB","Tailwind CSS","JWT Authentication"],
+      description: "A full-stack Task Manager web app that lets users register, log in, and manage tasks securely.",
+      technologies: ["React","TypeScript", "Node js", "Express js","MongoDB","Tailwind CSS"],
       github: "https://github.com/Sa5jay/task-manager-app",
       live: "https://task-manager-app-zeta-nine.vercel.app/"
     },
     {
       title: "Editable Poster HTML",
-      description: "A React-based visual editor that transforms static HTML files into interactive posters. Users can drag elements, edit text directly on the stage, and update images via a properties panel. The final, modified layout is then cleanly exported as a new .html file.",
+      description: "A React-based visual editor that transforms static HTML files into interactive posters.",
       technologies: ["React","TypeScript","Tailwind CSS","Vite"],
       github: "https://github.com/Sa5jay/editable-poster-html",
       live: "https://editable-poster-html.vercel.app/"
     }
-
   ];
 
   const skills = [
-    { name: "Frontend Development", icon: Code, items: ["React", "JavaScript", "TypeScript", "HTML/CSS","REST API","Bootstrap","Tailwind CSS"] },
-    { name: "Backend Development", icon: Database, items: ["Node.js", "Java", "MongoDB"] },
-    { name: "Tools & Deployment", icon: Globe, items: ["Git","Vercel","Figma","VS Code","Firebase","Netlify"] }
+    { name: "Frontend Development", icon: Code, items: ["React", "JavaScript (ES6+)", "TypeScript", "HTML5/CSS3", "Tailwind CSS", "REST APIs"] },
+    { name: "Backend Development", icon: Database, items: ["Node.js", "Express.js", "MongoDB", "Firebase", "Java"] },
+    { name: "Tools & Deployment", icon: Globe, items: ["Git", "GitHub", "Vercel", "Netlify", "Figma", "VS Code"] }
   ];
 
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      {/* Navigation */}
-      <header className="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800" role="banner">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} className="flex items-center space-x-3">
-              <div className="text-2xl font-bold text-white">Sanjay</div>
-            </a>
+    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
+      <Navbar onScrollTo={scrollToSection} />
 
-            {/* Mobile resume button (visible only on small screens) */}
-            <a
-              href="/My.Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Resume"
-              className="md:hidden ml-4 px-3 py-2 bg-white text-slate-950 rounded text-sm font-medium"
-            >
-              Resume
-            </a>
-
-            <nav className="hidden items-center md:flex space-x-6" aria-label="Primary">
-              {['home', 'about', 'projects', 'contact'].map((section) => (
+      <main>
+        {/* --- Hero Section --- */}
+        <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+            {/* Left: Text Content */}
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+                Sanjay Neelakandan
+              </h1>
+              <p className="text-2xl md:text-3xl text-blue-600 font-semibold mb-8">
+                Frontend & MERN Stack Developer
+              </p>
+              <p className="text-lg text-gray-700 max-w-xl mx-auto md:mx-0 mb-10 leading-relaxed">
+                I build modern, responsive, and user-friendly web applications, 
+                transforming ideas into high-quality code and delightful digital experiences.
+              </p>
+              <div className="flex justify-center md:justify-start items-center flex-wrap gap-4 mb-10">
                 <a
-                  key={section}
-                  href={`#${section}`}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(section); }}
-                  aria-current={activeSection === section ? 'page' : undefined}
-                  className={`capitalize transition-all duration-300 hover:text-white ${
-                    activeSection === section ? 'text-white' : 'text-slate-400'
-                  }`}
+                  href="#projects"
+                  onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}
+                  className="px-6 py-3 bg-blue-600 text-white rounded font-semibold shadow-lg transition-all duration-300 hover:bg-blue-700 hover:scale-105"
                 >
-                  {section}
+                  View My Work
                 </a>
-              ))}
-              <a
-                href="/My.Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-4 px-4 py-2 bg-white text-slate-950 rounded font-medium text-sm transition-all duration-200 hover:bg-slate-100"
-              >
-                View Resume
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-            backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%)',
-          }}
-        />
-        <div className="text-center z-10 max-w-4xl mx-auto px-6">
-          <div className="mb-8">
-            <div className="w-40 h-40 rounded-full border-2 border-slate-800 mx-auto mb-6 overflow-hidden">
-              <img src="/Profile.png" alt="Sanjay Neelakandan" className="w-full h-full object-cover rounded-full" loading="lazy" />
+                <a
+                  href="/My.Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-gray-100 text-gray-800 rounded font-semibold border border-gray-300 transition-all duration-300 hover:bg-gray-200"
+                >
+                  View Resume
+                </a>
+              </div>
+              <div className="flex justify-center md:justify-start space-x-8 text-gray-500">
+                <a href="https://github.com/Sa5jay" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-blue-600 transition-colors">
+                  <Github className="w-8 h-8" />
+                </a>
+                <a href="https://www.linkedin.com/in/sanjay-neelakandan-4b8832320/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-blue-600 transition-colors">
+                  <Linkedin className="w-8 h-8" />
+                </a>
+              </div>
             </div>
-          </div>
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-white">
-            Sanjay Neelakandan
-          </h1>
-          <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed">
-            Frontend & MERN Stack Developer
-          </p>
-          <p className="text-lg text-slate-400 mb-12 max-w-2xl mx-auto">
-            Creating beautiful, functional, and user-centered digital experiences with modern web technologies.
-          </p>
-          <div className="flex justify-center space-x-6">
-            <button
-              onClick={() => scrollToSection('projects')}
-              className="px-8 py-4 bg-white text-slate-950 rounded font-medium transition-all duration-300 hover:bg-slate-100"
-              aria-label="View projects"
-            >
-              View My Work
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="px-8 py-4 border border-slate-700 text-white rounded font-medium transition-all duration-300 hover:bg-slate-800"
-              aria-label="Contact me"
-            >
-              Get In Touch
-            </button>
-          </div>
-        </div>
-      </section>
+            
+            {/* Right: Profile Photo */}
+            <div className="flex justify-center">
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl ring-4 ring-white ring-offset-4 ring-offset-gray-50">
+                {/* ---
+                    --- IMPORTANT: Replace this 'img' src with your actual profile photo
+                    ---
+                */}
+                <img src="/Profile.png" alt="Sanjay Neelakandan" className="w-full h-full object-cover" />
+              </div>
+            </div>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-6 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
-            About Me
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          </div>
+        </section>
+
+        {/* --- About & Skills Section --- */}
+        <section id="about" className="py-20 px-6 bg-white">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                I'm a passionate full-stack developer creating digital solutions that combine beautiful design with robust functionality. I specialize in React, Node.js, and modern web technologies.
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">About Me</h2>
+              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+                Hello! I'm Sanjay, a passionate full-stack developer with a strong focus on building 
+                clean, efficient, and scalable web applications. I specialize in the MERN stack, 
+                leveraging React and Node.js to create seamless user experiences.
               </p>
-              <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.
+              <p className="text-lg text-gray-700 leading-relaxed">
+                I'm driven by a desire to solve problems and learn new technologies. From 
+                concept to deployment, I enjoy every part of the development process and 
+                I'm always looking for opportunities to grow and create impactful products.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-6">
-              {skills.map((skill, index) => (
-                <div key={index} className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-all duration-300">
-                  <skill.icon className="w-8 h-8 text-white mb-3" />
-                  <h3 className="font-semibold mb-2 text-white">{skill.name}</h3>
-                  <ul className="text-sm text-white/70 space-y-1">
-                    {skill.items.map((item, i) => (
-                      <li key={i}>{item}</li>
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">My Skills</h2>
+              <div className="space-y-6">
+                {skills.map((skill) => (
+                  <div key={skill.name} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <div className="flex items-center mb-3">
+                      <skill.icon className="w-6 h-6 text-blue-600 mr-3" />
+                      <h3 className="text-xl font-semibold text-gray-900">{skill.name}</h3>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {skill.items.map((item) => (
+                        <span key={item} className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- Projects Section --- */}
+        <section id="projects" className="py-20 px-6 bg-gray-50">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+              Featured Projects
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <article 
+                  key={index} 
+                  className="bg-white rounded-lg shadow-lg border border-gray-200 p-6 flex flex-col h-full
+                             transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                  aria-labelledby={`proj-title-${index}`}
+                >
+                  <h3 id={`proj-title-${index}`} className="text-xl font-semibold text-gray-900 mb-3">{project.title}</h3>
+                  <p className="text-gray-700 mb-4 leading-relaxed flex-grow">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                        {tech}
+                      </span>
                     ))}
-                  </ul>
-                </div>
+                  </div>
+                  <div className="flex space-x-4 mt-auto">
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+                    >
+                      <Github size={20} />
+                      <span>Code</span>
+                    </a>
+                    <a 
+                      href={project.live} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+                    >
+                      <ExternalLink size={20} />
+                      <span>Live Demo</span>
+                    </a>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-slate-950">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
-            Featured Projects
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <article key={index} className="bg-slate-900 rounded-lg p-6 hover:bg-slate-800 transition-all duration-300" aria-labelledby={`proj-${index}`}>
-                <h3 id={`proj-${index}`} className="text-xl font-semibold mb-3 text-white">{project.title}</h3>
-                <p className="text-slate-300 mb-4 text-sm leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex space-x-4">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1 text-white hover:text-slate-300 transition-colors text-sm">
-                    <Github size={16} />
-                    <span>Code</span>
-                  </a>
-                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1 text-white hover:text-slate-300 transition-colors text-sm">
-                    <ExternalLink size={16} />
-                    <span>Live Demo</span>
-                  </a>
-                </div>
-              </article>
-            ))}
+        {/* --- Contact Section --- */}
+        <section id="contact" className="py-20 px-6 bg-white">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+              Get In Touch
+            </h2>
+            <p className="text-lg text-gray-700 text-center mb-10">
+              I'm currently open to new opportunities. If you have a project in mind 
+              or just want to connect, feel free to send me a message!
+            </p>
+            <ContactForm />
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 bg-slate-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-white">
-            Let's Work Together
-          </h2>
-          <p className="text-xl text-slate-300 mb-12 leading-relaxed">
-            I'm always interested in new opportunities and exciting projects. Let's create something amazing together!
-          </p>
-          <div className="flex justify-center space-x-8 mb-12">
-            <a href="mailto:sanjayn05@gmail.com" className="flex flex-col items-center space-y-2 hover:text-slate-300" aria-label="Email Sanjay">
-              <Mail className="w-8 h-8 text-white" />
-              <span className="text-slate-300">Email</span>
-            </a>
-            <a href="https://www.linkedin.com/in/sanjay-neelakandan-4b8832320/" className="flex flex-col items-center space-y-2 hover:text-slate-300" target="_blank" rel="noopener noreferrer">
-              <Linkedin className="w-8 h-8 text-white" />
-              <span className="text-slate-300">LinkedIn</span>
-              
-            </a>
-            <a href="https://github.com/Sa5jay" className="flex flex-col items-center space-y-2 hover:text-slate-300" target="_blank" rel="noopener noreferrer">
-              <Github className="w-8 h-8 text-white" />
-              <span className="text-slate-300">GitHub</span>
-              
-            </a>
-            <a href="https://wa.me/918248830924" className="flex flex-col items-center space-y-2 hover:text-slate-300" target="_blank" rel="noopener noreferrer">
-              <Phone className="w-8 h-8 text-white" />
-              <span className="text-slate-300">Contact</span>
-              
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-slate-800 bg-slate-950" role="contentinfo">
-        <div className="max-w-6xl mx-auto text-center text-slate-400">
-          <p>&copy; {new Date().getFullYear()} Sanjay Neelakandan.</p>
+      {/* --- Footer --- */}
+      <footer className="py-8 px-6 border-t border-gray-200 bg-gray-50">
+        <div className="max-w-6xl mx-auto text-center text-gray-500">
+          <p>&copy; {new Date().getFullYear()} Sanjay Neelakandan. All rights reserved.</p>
         </div>
       </footer>
     </div>
