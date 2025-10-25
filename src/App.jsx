@@ -214,7 +214,7 @@ const App = () => {
               <Mail className="w-8 h-8 text-white" />
               <span className="text-slate-300">Email</span>
             </a>
-            <a href="https://www.linkedin.com/in/sanjayneelakandan/" className="flex flex-col items-center space-y-2 hover:text-slate-300" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/sanjay-neelakandan-4b8832320/" className="flex flex-col items-center space-y-2 hover:text-slate-300" target="_blank" rel="noopener noreferrer">
               <Linkedin className="w-8 h-8 text-white" />
               <span className="text-slate-300">LinkedIn</span>
               
