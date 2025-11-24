@@ -217,7 +217,8 @@ const App = () => {
   const skills = [
     { name: "Frontend Development", icon: Code, items: ["React", "JavaScript (ES6+)", "TypeScript", "HTML5/CSS3", "Tailwind CSS", "REST APIs"] },
     { name: "Backend Development", icon: Database, items: ["Node.js", "Express.js", "MongoDB", "Firebase", "Java","MySql"] },
-    { name: "Tools & Deployment", icon: Globe, items: ["Git", "GitHub", "Vercel", "Netlify", "Figma", "VS Code"] }
+    { name: "Tools & Deployment", icon: Globe, items: ["Git", "GitHub", "Vercel", "Netlify", "Figma", "VS Code"] },
+    { name: "Languages", icon: Globe, items: ["Java", "MySql", "JavaScript"] }
   ];
 
   const scrollToSection = (sectionId) => {
@@ -274,11 +275,7 @@ const App = () => {
             {/* Right: Profile Photo */}
             <div className="flex justify-center">
               <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl ring-4 ring-white ring-offset-4 ring-offset-gray-50">
-                {/* ---
-                    --- IMPORTANT: Replace this 'img' src with your actual profile photo
-                    ---
-                */}
-                <img src="/Profile.png" alt="Sanjay Neelakandan" className="w-full h-full object-cover" />
+                <img src="/Profile.png" alt="Sanjay Neelakandan" className="w-full h-full  object-cover" />
               </div>
             </div>
 
