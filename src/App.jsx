@@ -204,12 +204,19 @@ const App = () => {
       technologies: ["React","TypeScript","Tailwind CSS","Vite"],
       github: "https://github.com/Sa5jay/editable-poster-html",
       live: "https://editable-poster-html.vercel.app/"
+    },
+    {
+      title: "Tic Tac Toe Game with AI",
+      description: "A web-based Tic Tac Toe game featuring an AI opponent powered by the Minimax algorithm for optimal gameplay.",
+      technologies: ["React","TypeScript","Tailwind CSS","Vite","OpenAI API"],
+      github: "https://github.com/Sa5jay/30-apps/tree/main/Tic-Tac-Tai",
+      live: "https://codejavid-apps.vercel.app/"
     }
   ];
 
   const skills = [
     { name: "Frontend Development", icon: Code, items: ["React", "JavaScript (ES6+)", "TypeScript", "HTML5/CSS3", "Tailwind CSS", "REST APIs"] },
-    { name: "Backend Development", icon: Database, items: ["Node.js", "Express.js", "MongoDB", "Firebase", "Java"] },
+    { name: "Backend Development", icon: Database, items: ["Node.js", "Express.js", "MongoDB", "Firebase", "Java","MySql"] },
     { name: "Tools & Deployment", icon: Globe, items: ["Git", "GitHub", "Vercel", "Netlify", "Figma", "VS Code"] }
   ];
 
