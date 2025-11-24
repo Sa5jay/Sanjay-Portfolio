@@ -137,6 +137,14 @@ const Navbar = ({ onScrollTo }) => {
                 {link.title}
               </a>
             ))}
+            <a
+              href="/Sanjay.Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition-all duration-200 hover:bg-blue-700"
+            >
+              View Resume
+            </a>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -166,6 +174,14 @@ const Navbar = ({ onScrollTo }) => {
                 {link.title}
               </a>
             ))}
+            <a
+              href="/My.Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded font-medium text-center"
+            >
+              View Resume
+            </a>
           </nav>
         </div>
       )}
@@ -204,21 +220,13 @@ const App = () => {
       technologies: ["React","TypeScript","Tailwind CSS","Vite"],
       github: "https://github.com/Sa5jay/editable-poster-html",
       live: "https://editable-poster-html.vercel.app/"
-    },
-    {
-      title: "Tic Tac Toe Game with AI",
-      description: "A web-based Tic Tac Toe game featuring an AI opponent powered by the Minimax algorithm for optimal gameplay.",
-      technologies: ["React","TypeScript","Tailwind CSS","Vite","OpenAI API"],
-      github: "https://github.com/Sa5jay/30-apps/tree/main/Tic-Tac-Tai",
-      live: "https://codejavid-apps.vercel.app/"
     }
   ];
 
   const skills = [
     { name: "Frontend Development", icon: Code, items: ["React", "JavaScript (ES6+)", "TypeScript", "HTML5/CSS3", "Tailwind CSS", "REST APIs"] },
-    { name: "Backend Development", icon: Database, items: ["Node.js", "Express.js", "MongoDB", "Firebase", "Java","MySql"] },
-    { name: "Tools & Deployment", icon: Globe, items: ["Git", "GitHub", "Vercel", "Netlify", "Figma", "VS Code"] },
-    { name: "Languages", icon: Globe, items: ["Java", "MySql", "JavaScript"] }
+    { name: "Backend Development", icon: Database, items: ["Node.js", "Express.js", "MongoDB", "Firebase", "Java"] },
+    { name: "Tools & Deployment", icon: Globe, items: ["Git", "GitHub", "Vercel", "Netlify", "Figma", "VS Code"] }
   ];
 
   const scrollToSection = (sectionId) => {
@@ -254,7 +262,7 @@ const App = () => {
                   View My Work
                 </a>
                 <a
-                  href="/MyResume.pdf"
+                  href="/My.Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gray-100 text-gray-800 rounded font-semibold border border-gray-300 transition-all duration-300 hover:bg-gray-200"
@@ -275,7 +283,11 @@ const App = () => {
             {/* Right: Profile Photo */}
             <div className="flex justify-center">
               <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl ring-4 ring-white ring-offset-4 ring-offset-gray-50">
-                <img src="/Profile.png" alt="Sanjay Neelakandan" className="w-full h-full  object-cover" />
+                {/* ---
+                    --- IMPORTANT: Replace this 'img' src with your actual profile photo
+                    ---
+                */}
+                <img src="/Profile.png" alt="Sanjay Neelakandan" className="w-full h-full object-cover" />
               </div>
             </div>
 
